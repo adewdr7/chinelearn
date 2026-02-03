@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "id": "test_basic",
+      "title": "Kosakata Dasar (Tes)",
+      "file": "kosakata.json"
+    }
+  ]
+}
