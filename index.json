@@ -1,10 +1,22 @@
-{
-  "version": 1,
-  "categories": [
-    {
-      "id": "test_basic",
-      "title": "Kosakata Dasar (Tes)",
-      "file": "kosakata.json"
-    }
-  ]
-}
+[
+  { "hanzi": "我", "pinyin": "wǒ", "idn": "saya" },
+  { "hanzi": "你", "pinyin": "nǐ", "idn": "kamu" },
+  { "hanzi": "好", "pinyin": "hǎo", "idn": "baik/bagus" },
+  { "hanzi": "家", "pinyin": "jiā", "idn": "rumah/keluarga" },
+  { "hanzi": "水", "pinyin": "shuǐ", "idn": "air" },
+  { "hanzi": "饭", "pinyin": "fàn", "idn": "nasi/makanan" },
+  { "hanzi": "看", "pinyin": "kàn", "idn": "melihat/membaca" },
+  { "hanzi": "听", "pinyin": "tīng", "idn": "mendengar" },
+  { "hanzi": "说话", "pinyin": "shuō huà", "idn": "berbicara" },
+  { "hanzi": "学习", "pinyin": "xué xí", "idn": "belajar" },
+  { "hanzi": "老师", "pinyin": "lǎo shī", "idn": "guru" },
+  { "hanzi": "学生", "pinyin": "xué sheng", "idn": "murid" },
+  { "hanzi": "朋友", "pinyin": "péng you", "idn": "teman" },
+  { "hanzi": "中国", "pinyin": "zhōng guó", "idn": "Tiongkok" },
+  { "hanzi": "天气", "pinyin": "tiān qì", "idn": "cuaca" },
+  { "hanzi": "苹果", "pinyin": "píng guǒ", "idn": "apel" },
+  { "hanzi": "买", "pinyin": "mǎi", "idn": "membeli" },
+  { "hanzi": "多", "pinyin": "duō", "idn": "banyak" },
+  { "hanzi": "少", "pinyin": "shǎo", "idn": "sedikit" },
+  { "hanzi": "什么", "pinyin": "shén me", "idn": "apa" }
+]
