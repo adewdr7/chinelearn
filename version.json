@@ -1,8 +1,8 @@
 {
-  "version_code": 1,
-  "version_name": "1.0.0",
-  "download_url": "https://apkpure.com/mandarin-learning-center/com.smurf.mandarin",
-  "changelog": "- Rilis perdana aplikasi\n- Fitur HSK Daily Challenge\n- Fitur Latihan Kosakata\n- Fitur Susun Kalimat\n- Fitur Pencocokkan\n- Fitur Hanzi Master",
-  "force_update": false,
-  "min_supported_version": 1
+  "version_code": 2,
+  "version_name": "1.0.0",
+  "download_url": "https://www.mediafire.com/file/p57t6lmcszhb0qi/Xuexi+Zhongguo.apk/file",
+  "changelog": "UPDATE : 1. Latihan Speaking Kosakata n/ 2. Latihan Speaking Kalimat n/ 3. Perbaikan Update 20 Kosakata HSK harian n/ 4. Peningkatan ParseBulk Kalimat n/ 5. Perbaikan Opsi Main Lagi Di Pencocokkan n/ 6. Visual Paket Jadi Scrollable",
+  "force_update": true,
+  "min_supported_version": 1
 }
