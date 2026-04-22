@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChineLearn — Belajar Mandarin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --amber: #F59E0B;
+            --orange: #EA580C;
+            --indigo: #4F46E5;
+            --slate: #1E293B;
+            --slate-light: #64748B;
+            --bg: #F8FAFC;
+            --white: #ffffff;
+            --radius: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--slate);
+            min-height: 100vh;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: white;
+            border-bottom: 1px solid #E2E8F0;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-logo {
+            width: 42px; height: 42px;
+            background: linear-gradient(135deg, var(--indigo), #7C3AED);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 18px;
+        }
+        .nav-title { font-size: 18px; font-weight: 800; color: var(--slate); }
+        .nav-sub { font-size: 11px; color: var(--slate-light); }
+        .nav-badge {
+            background: #EEF2FF; color: var(--indigo);
+            font-size: 10px; font-weight: 700;
+            padding: 3px 10px; border-radius: 999px;
+            border: 1px solid #C7D2FE;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #DB2777 100%);
+            padding: 56px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '学';
+            font-family: 'Noto Serif SC', serif;
+            font-size: 280px;
+            color: rgba(255,255,255,0.05);
+            position: absolute;
+            top: -40px; right: -30px;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 11px; font-weight: 700;
+            padding: 4px 14px; border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.3);
+            margin-bottom: 16px;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 44px);
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+        .hero p {
+            color: rgba(255,255,255,0.8);
+            font-size: 15px;
+            max-width: 500px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
+        }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: white;
+            color: var(--indigo);
+            font-weight: 700; font-size: 15px;
+            padding: 14px 28px; border-radius: 14px;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+
+        /* ── CONTAINER ── */
+        .container { max-width: 960px; margin: 0 auto; padding: 32px 20px; }
+
+        /* ── FEATURES GRID ── */
+        .section-title {
+            font-size: 13px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--slate-light);
+            margin-bottom: 16px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            border: 1px solid #E2E8F0;
+            display: flex; align-items: center; gap: 14px;
+            transition: box-shadow .2s, transform .2s;
+            cursor: default;
+        }
+        .feature-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
+        }
+        .feature-name { font-weight: 700; font-size: 13px; }
+        .feature-desc { font-size: 11px; color: var(--slate-light); margin-top: 2px; }
+
+        /* ── PRICING ── */
+        .pricing-section { margin-bottom: 40px; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .pricing-card {
+            background: white;
+            border-radius: var(--radius);
+            border: 2px solid #E2E8F0;
+            padding: 28px 24px;
+            position: relative;
+            transition: box-shadow .2s, transform .2s;
+        }
+        .pricing-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-3px); }
+        .pricing-card.popular {
+            border-color: var(--amber);
+            box-shadow: 0 0 0 4px rgba(245,158,11,0.1);
+        }
+        .popular-badge {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--amber), var(--orange));
+            color: white; font-size: 10px; font-weight: 800;
+            padding: 4px 14px; border-radius: 999px;
+            text-transform: uppercase; letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        .pricing-plan { font-size: 13px; font-weight: 600; color: var(--slate-light); margin-bottom: 8px; }
+        .pricing-price {
+            font-size: 32px; font-weight: 800; color: var(--slate);
+            line-height: 1;
+        }
+        .pricing-price span { font-size: 14px; font-weight: 500; color: var(--slate-light); }
+        .pricing-perks { margin: 16px 0; }
+        .pricing-perk {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 13px; color: var(--slate-light);
+            padding: 4px 0;
+        }
+        .pricing-perk i { color: #10B981; font-size: 12px; width: 16px; }
+        .btn-pay {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 700; font-size: 14px;
+            border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all .2s;
+        }
+        .btn-pay-primary {
+            background: linear-gradient(135deg, var(--amber), var(--orange));
+            color: white;
+            box-shadow: 0 4px 16px rgba(245,158,11,0.35);
+        }
+        .btn-pay-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,0.45); }
+        .btn-pay-secondary {
+            background: #F1F5F9; color: var(--slate);
+        }
+        .btn-pay-secondary:hover { background: #E2E8F0; }
+
+        /* ── AD BANNER MOCKUP ── */
+        .ad-banner {
+            background: linear-gradient(90deg, #FFF7ED, #FEF3C7);
+            border: 1px dashed #FCD34D;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        }
+        .ad-banner-text { font-size: 12px; color: #92400E; }
+        .ad-banner-text strong { display: block; font-size: 13px; }
+        .ad-x { background: none; border: 1px solid #FCD34D; border-radius: 8px; padding: 4px 10px; font-size: 11px; color: #92400E; cursor: pointer; }
+
+        /* ── HOW IT WORKS ── */
+        .steps { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+        .step {
+            display: flex; align-items: flex-start; gap: 16px;
+            background: white; border-radius: var(--radius);
+            padding: 20px; border: 1px solid #E2E8F0;
+        }
+        .step-num {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--indigo), #7C3AED);
+            color: white; font-weight: 800; font-size: 15px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .step-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+        .step-desc { font-size: 13px; color: var(--slate-light); line-height: 1.5; }
+
+        /* ── MODAL ── */
+        .modal-overlay {
+            display: none;
+            position: fixed; inset: 0; z-index: 200;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(4px);
+            align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: white;
+            border-radius: 28px;
+            width: 100%; max-width: 400px;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+            animation: slideUp .3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-header {
+            background: linear-gradient(135deg, var(--amber), var(--orange));
+            padding: 24px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .modal-header-title { color: white; font-weight: 800; font-size: 17px; }
+        .modal-header-sub { color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 2px; }
+        .modal-close {
+            background: rgba(255,255,255,0.2); border: none; cursor: pointer;
+            width: 32px; height: 32px; border-radius: 8px;
+            color: white; font-size: 16px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-body { padding: 24px; }
+
+        /* Midtrans Payment Simulation */
+        .payment-steps { display: flex; flex-direction: column; gap: 0; }
+        .pay-step { display: none; }
+        .pay-step.active { display: block; }
+
+        .method-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;
+        }
+        .method-btn {
+            border: 2px solid #E2E8F0; border-radius: 14px;
+            padding: 14px 10px;
+            background: white; cursor: pointer;
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            font-size: 12px; font-weight: 600; color: var(--slate);
+            transition: all .2s;
+        }
+        .method-btn:hover, .method-btn.selected { border-color: var(--amber); background: #FFF7ED; }
+        .method-btn i { font-size: 22px; color: var(--orange); }
+
+        .amount-box {
+            background: linear-gradient(135deg, #F0FDF4, #ECFDF5);
+            border: 1px solid #A7F3D0;
+            border-radius: 14px; padding: 16px; margin-bottom: 16px; text-align: center;
+        }
+        .amount-label { font-size: 11px; color: #065F46; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+        .amount-value { font-size: 28px; font-weight: 800; color: #065F46; margin-top: 4px; }
+        .amount-plan { font-size: 12px; color: #059669; margin-top: 2px; }
+
+        .input-label { font-size: 11px; font-weight: 700; color: var(--slate-light); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+        .input-field {
+            width: 100%; padding: 12px 14px;
+            border: 2px solid #E2E8F0; border-radius: 12px;
+            font-size: 14px; font-family: inherit;
+            outline: none; transition: border-color .2s;
+            margin-bottom: 12px;
+        }
+        .input-field:focus { border-color: var(--amber); }
+
+        .info-box {
+            background: #EFF6FF; border: 1px solid #BFDBFE;
+            border-radius: 12px; padding: 14px; margin-bottom: 16px;
+            font-size: 12px; color: #1D4ED8; line-height: 1.6;
+        }
+        .info-box i { margin-right: 6px; }
+
+        .success-icon {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: linear-gradient(135deg, #10B981, #059669);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px; color: white;
+            box-shadow: 0 8px 24px rgba(16,185,129,0.3);
+        }
+        .code-display {
+            background: #1E293B; border-radius: 14px; padding: 20px;
+            text-align: center; margin: 16px 0;
+        }
+        .code-label { font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .code-value {
+            font-family: 'Courier New', monospace;
+            font-size: 22px; font-weight: 800;
+            color: #F59E0B; letter-spacing: 4px;
+        }
+        .code-hint { font-size: 11px; color: #64748B; margin-top: 8px; }
+
+        .btn-full {
+            width: 100%; padding: 14px;
+            border-radius: 14px; border: none; cursor: pointer;
+            font-size: 15px; font-weight: 700;
+            font-family: inherit;
+        }
+        .btn-orange {
+            background: linear-gradient(135deg, var(--amber), var(--orange));
+            color: white; box-shadow: 0 4px 16px rgba(245,158,11,0.3);
+        }
+        .btn-orange:hover { opacity: 0.9; }
+        .btn-slate { background: #F1F5F9; color: var(--slate); margin-top: 8px; }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid #E2E8F0;
+            padding: 24px;
+            text-align: center;
+            font-size: 12px; color: var(--slate-light);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 480px) {
+            .hero { padding: 40px 16px; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-brand">
+        <div class="nav-logo"><i class="fa-solid fa-book-open"></i></div>
+        <div>
+            <div class="nav-title">ChineLearn</div>
+            <div class="nav-sub">Belajar Mandarin dengan AI</div>
+        </div>
+    </div>
+    <span class="nav-badge">Staging Demo</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-tag">🇨🇳 Aplikasi Belajar Mandarin</div>
+    <h1>Kuasai Bahasa Mandarin<br>dengan Cara Asik</h1>
+    <p>Latihan kosakata, Hanzi, HSK, dan AI Generator — semua dalam satu aplikasi Android.</p>
+    <a href="#pricing" class="hero-cta">
+        <i class="fa-solid fa-ban"></i> Hapus Iklan Sekarang
+    </a>
+</section>
+
+<div class="container">
+
+    <!-- AD BANNER MOCKUP -->
+    <div class="ad-banner">
+        <div>
+            <div class="ad-banner-text">
+                <strong>📢 Iklan — Dapatkan Produk Terbaik</strong>
+                Contoh banner iklan yang muncul di aplikasi versi gratis
+            </div>
+        </div>
+        <button class="ad-x" onclick="this.parentElement.style.display='none'">✕ Tutup</button>
+    </div>
+
+    <!-- FITUR -->
+    <p class="section-title">Fitur Aplikasi</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon" style="background:#EEF2FF;color:#4F46E5"><i class="fa-solid fa-shuffle"></i></div>
+            <div><div class="feature-name">Kosakata Acak</div><div class="feature-desc">Latih kosa kata mandarin</div></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background:#F0FDF4;color:#16A34A"><i class="fa-solid fa-clone"></i></div>
+            <div><div class="feature-name">Pencocokan</div><div class="feature-desc">Cocokkan kata & arti</div></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background:#FDF4FF;color:#9333EA"><i class="fa-solid fa-brain"></i></div>
+            <div><div class="feature-name">Memori Hanzi</div><div class="feature-desc">Hafal karakter Hanzi</div></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background:#FFF7ED;color:#EA580C"><i class="fa-solid fa-pen-nib"></i></div>
+            <div><div class="feature-name">Susun Kalimat</div><div class="feature-desc">Latihan tata bahasa</div></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background:#EFF6FF;color:#2563EB"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div><div class="feature-name">Perjalanan HSK</div><div class="feature-desc">Level HSK 1–6</div></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon" style="background:#F0FDF4;color:#059669"><i class="fa-solid fa-robot"></i></div>
+            <div><div class="feature-name">AI Generator</div><div class="feature-desc">Buat materi otomatis</div></div>
+        </div>
+    </div>
+
+    <!-- PRICING -->
+    <div class="pricing-section" id="pricing">
+        <p class="section-title">✨ Hapus Iklan — Pilih Paket</p>
+        <div class="pricing-grid">
+
+            <!-- Mingguan -->
+            <div class="pricing-card">
+                <div class="pricing-plan">1 Minggu</div>
+                <div class="pricing-price">Rp 5.000 <span>/ minggu</span></div>
+                <div class="pricing-perks">
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> Tanpa iklan 7 hari</div>
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> 1 perangkat</div>
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> Kode instan otomatis</div>
+                </div>
+                <button class="btn-pay btn-pay-secondary" onclick="openPayModal('1 Minggu', 'Rp 5.000')">
+                    <i class="fa-solid fa-cart-shopping"></i> Pilih Paket
+                </button>
+            </div>
+
+            <!-- Bulanan - Popular -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">⭐ Paling Populer</div>
+                <div class="pricing-plan">1 Bulan</div>
+                <div class="pricing-price">Rp 15.000 <span>/ bulan</span></div>
+                <div class="pricing-perks">
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> Tanpa iklan 30 hari</div>
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> 1 perangkat</div>
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> Kode instan otomatis</div>
+                </div>
+                <button class="btn-pay btn-pay-primary" onclick="openPayModal('1 Bulan', 'Rp 15.000')">
+                    <i class="fa-solid fa-bolt"></i> Pilih Paket
+                </button>
+            </div>
+
+            <!-- Selamanya -->
+            <div class="pricing-card">
+                <div class="pricing-plan">Selamanya</div>
+                <div class="pricing-price">Rp 35.000 <span>/ lifetime</span></div>
+                <div class="pricing-perks">
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> Tanpa iklan selamanya</div>
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> 1 perangkat</div>
+                    <div class="pricing-perk"><i class="fa-solid fa-check"></i> Kode instan otomatis</div>
+                </div>
+                <button class="btn-pay btn-pay-secondary" onclick="openPayModal('Selamanya', 'Rp 35.000')">
+                    <i class="fa-solid fa-infinity"></i> Pilih Paket
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <p class="section-title">Cara Kerja</p>
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div>
+                <div class="step-title">Pilih Paket & Bayar</div>
+                <div class="step-desc">Pilih durasi yang kamu mau, lalu selesaikan pembayaran via Midtrans (QRIS, Transfer Bank, dll).</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div>
+                <div class="step-title">Dapat Kode Otomatis</div>
+                <div class="step-desc">Setelah pembayaran berhasil, kode aktivasi dikirim otomatis — tampil langsung di layar.</div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div>
+                <div class="step-title">Input Kode di Aplikasi</div>
+                <div class="step-desc">Buka aplikasi ChineLearn → Hapus Iklan → masukkan kode → iklan langsung hilang!</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2025 ChineLearn · Demo Staging · Dibuat untuk keperluan registrasi Midtrans
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     MODAL PEMBAYARAN (Simulasi Midtrans Flow)
+════════════════════════════════════════════ -->
+<div class="modal-overlay" id="payModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <div class="modal-header-title">✨ Hapus Iklan</div>
+                <div class="modal-header-sub" id="modalSubtitle">Pilih metode pembayaran</div>
+            </div>
+            <button class="modal-close" onclick="closePayModal()">✕</button>
+        </div>
+        <div class="modal-body">
+
+            <!-- STEP 1: Pilih Metode -->
+            <div class="pay-step active" id="step1">
+                <div class="amount-box">
+                    <div class="amount-label">Total Pembayaran</div>
+                    <div class="amount-value" id="modalAmount">Rp 15.000</div>
+                    <div class="amount-plan" id="modalPlan">Paket 1 Bulan</div>
+                </div>
+                <p class="input-label">Pilih Metode Pembayaran</p>
+                <div class="method-grid">
+                    <button class="method-btn" onclick="selectMethod(this, 'QRIS')">
+                        <i class="fa-solid fa-qrcode"></i> QRIS
+                    </button>
+                    <button class="method-btn" onclick="selectMethod(this, 'Transfer Bank')">
+                        <i class="fa-solid fa-building-columns"></i> Transfer Bank
+                    </button>
+                    <button class="method-btn" onclick="selectMethod(this, 'GoPay')">
+                        <i class="fa-solid fa-wallet"></i> GoPay
+                    </button>
+                    <button class="method-btn" onclick="selectMethod(this, 'OVO')">
+                        <i class="fa-solid fa-mobile-screen"></i> OVO
+                    </button>
+                </div>
+                <button class="btn-full btn-orange" onclick="goToStep2()">
+                    <i class="fa-solid fa-arrow-right"></i> Lanjut Bayar
+                </button>
+                <button class="btn-full btn-slate" onclick="closePayModal()">Batal</button>
+            </div>
+
+            <!-- STEP 2: Proses Bayar -->
+            <div class="pay-step" id="step2">
+                <div class="amount-box">
+                    <div class="amount-label">Total Pembayaran</div>
+                    <div class="amount-value" id="modalAmount2">Rp 15.000</div>
+                    <div class="amount-plan" id="modalMethod">via QRIS</div>
+                </div>
+                <div class="info-box">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Ini adalah <strong>simulasi tampilan pembayaran</strong>. Pada aplikasi nyata, halaman ini akan diarahkan ke Midtrans Payment Page.
+                </div>
+                <p class="input-label">Nama Pembeli</p>
+                <input class="input-field" type="text" placeholder="Masukkan nama kamu" id="buyerName">
+                <p class="input-label">Email (opsional)</p>
+                <input class="input-field" type="email" placeholder="untuk konfirmasi email">
+                <button class="btn-full btn-orange" onclick="simulatePay()">
+                    <i class="fa-solid fa-lock"></i> Bayar Sekarang
+                </button>
+                <button class="btn-full btn-slate" onclick="backToStep1()">← Kembali</button>
+            </div>
+
+            <!-- STEP 3: Processing -->
+            <div class="pay-step" id="step3" style="text-align:center;padding:20px 0;">
+                <div style="font-size:48px;margin-bottom:16px;animation:spin 1s linear infinite;">⚙️</div>
+                <div style="font-weight:700;font-size:16px;margin-bottom:8px;">Memproses Pembayaran...</div>
+                <div style="font-size:13px;color:#64748B;">Midtrans sedang memverifikasi transaksi kamu</div>
+                <style>@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }</style>
+            </div>
+
+            <!-- STEP 4: Sukses + Kode -->
+            <div class="pay-step" id="step4" style="text-align:center;">
+                <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+                <div style="font-weight:800;font-size:18px;margin-bottom:6px;">Pembayaran Berhasil! 🎉</div>
+                <div style="font-size:13px;color:#64748B;margin-bottom:4px;">Kode aktivasi kamu:</div>
+
+                <div class="code-display">
+                    <div class="code-label">Kode Lisensi</div>
+                    <div class="code-value" id="generatedCode">CHIN-XXXX-YYYY</div>
+                    <div class="code-hint">Simpan kode ini baik-baik!</div>
+                </div>
+
+                <div class="info-box" style="text-align:left;">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    Buka aplikasi <strong>ChineLearn</strong> → Ketuk <strong>"Hapus Iklan"</strong> → Masukkan kode di atas → Aktifkan!
+                </div>
+
+                <button class="btn-full btn-orange" onclick="copyCode()">
+                    <i class="fa-solid fa-copy"></i> Salin Kode
+                </button>
+                <button class="btn-full btn-slate" onclick="closePayModal()">Selesai</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // ── State ──
+    let selectedMethod = '';
+    let currentPlan = '';
+    let currentAmount = '';
+
+    function openPayModal(plan, amount) {
+        currentPlan = plan;
+        currentAmount = amount;
+        document.getElementById('modalAmount').textContent = amount;
+        document.getElementById('modalAmount2').textContent = amount;
+        document.getElementById('modalPlan').textContent = 'Paket ' + plan;
+        document.getElementById('modalSubtitle').textContent = 'Paket ' + plan;
+        document.getElementById('payModal').classList.add('open');
+        showStep('step1');
+        selectedMethod = '';
+        document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('selected'));
+    }
+
+    function closePayModal() {
+        document.getElementById('payModal').classList.remove('open');
+        setTimeout(() => showStep('step1'), 300);
+    }
+
+    function showStep(id) {
+        document.querySelectorAll('.pay-step').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    function selectMethod(btn, method) {
+        document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedMethod = method;
+    }
+
+    function goToStep2() {
+        if (!selectedMethod) { alert('Pilih metode pembayaran dulu ya!'); return; }
+        document.getElementById('modalMethod').textContent = 'via ' + selectedMethod;
+        showStep('step2');
+    }
+
+    function backToStep1() { showStep('step1'); }
+
+    function simulatePay() {
+        const name = document.getElementById('buyerName').value.trim();
+        if (!name) { alert('Masukkan nama kamu dulu ya!'); return; }
+        showStep('step3');
+        setTimeout(() => {
+            document.getElementById('generatedCode').textContent = generateCode();
+            showStep('step4');
+        }, 2500);
+    }
+
+    function generateCode() {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        const seg = () => Array.from({length:4}, () => chars[Math.floor(Math.random()*chars.length)]).join('');
+        return 'CHIN-' + seg() + '-' + seg();
+    }
+
+    function copyCode() {
+        const code = document.getElementById('generatedCode').textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            alert('Kode ' + code + ' berhasil disalin!');
+        }).catch(() => {
+            prompt('Salin kode ini:', code);
+        });
+    }
+
+    // Tutup modal klik overlay
+    document.getElementById('payModal').addEventListener('click', function(e) {
+        if (e.target === this) closePayModal();
+    });
+</script>
+
+</body>
+</html>
